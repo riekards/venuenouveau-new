@@ -70,6 +70,7 @@ TEMPLATES = [
 ]
 
 
+
 WSGI_APPLICATION = 'venuenouveau.wsgi.application'
 
 

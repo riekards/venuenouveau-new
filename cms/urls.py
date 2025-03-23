@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import home, page_detail
 
-app_name = 'cms'  # This registers the namespace for URL reversal
+app_name = 'cms'
 
 urlpatterns = [
     path('', home, name='home'),

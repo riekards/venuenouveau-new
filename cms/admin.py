@@ -3,14 +3,14 @@ from .models import Page, GalleryItem
 
 class PageAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'is_public', 'last_updated')
-    readonly_fields = ('slug', 'last_updated')  # Prevent editing these fields
+    readonly_fields = ('slug', 'last_updated')
 
     def has_add_permission(self, request):
-        # Disable adding new pages (only edit existing ones)
+        # Prevent adding new pages
         return False
 
     def has_delete_permission(self, request, obj=None):
-        # Disable deletion of pages
+        # Prevent deleting pages
         return False
 
 admin.site.register(Page, PageAdmin)

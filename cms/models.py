@@ -5,14 +5,13 @@ class Page(models.Model):
     slug = models.SlugField(unique=True)
     content = models.TextField()
     background_image = models.ImageField(upload_to='page_backgrounds/', blank=True, null=True)
-    is_public = models.BooleanField(default=True)  # If False, page is hidden from public navigation
+    is_public = models.BooleanField(default=True)  # false = hidden (e.g., Gallery)
     last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
 
 class GalleryItem(models.Model):
-    # This model is for the Gallery page (which you'll mark as not public)
     page = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='gallery_items')
     media_file = models.FileField(upload_to='gallery_media/')
     caption = models.CharField(max_length=255, blank=True)
