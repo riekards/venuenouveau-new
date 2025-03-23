@@ -1,0 +1,14 @@
+{% extends "cms/base.html" %}
+{% load static %}
+
+{% block title %}Home - Venue Nouveau{% endblock %}
+
+{% block content %}
+<!-- Hero section with explicit background image -->
+<div class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{% static 'images/VN_Slide_0.jpg' %}') no-repeat center center/cover; height: 80vh; display: flex; align-items: center; justify-content: center; color: white;">
+    <div class="container text-center">
+        <h1 class="fade-in">Welcome to Venue Nouveau</h1>
+        <p class="fade-in">Your perfect wedding venue in South Africa</p>
+    </div> 
+</div>
+{% endblock %}

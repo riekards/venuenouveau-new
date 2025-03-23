@@ -1,3 +1,17 @@
 from django.contrib import admin
+from .models import Page, GalleryItem
 
-# Register your models here.
+class PageAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'is_public', 'last_updated')
+    readonly_fields = ('slug', 'last_updated')  # Prevent editing these fields
+
+    def has_add_permission(self, request):
+        # Disable adding new pages (only edit existing ones)
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        # Disable deletion of pages
+        return False
+
+admin.site.register(Page, PageAdmin)
+admin.site.register(GalleryItem)
