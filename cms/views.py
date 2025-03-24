@@ -7,5 +7,5 @@ def home(request):
     return render(request, 'cms/page_detail.html', {'page': page})
 
 def page_detail(request, slug):
-    page = get_object_or_404(Page, slug=slug)
-    return render(request, 'cms/page_detail.html', {'page': page})
+	page = get_object_or_404(Page, slug=slug, is_public=True)
+	return render(request, 'cms/page_detail.html', {'page': page})

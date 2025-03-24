@@ -4,6 +4,6 @@ from .views import home, page_detail
 app_name = 'cms'
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('pages/<slug:slug>/', page_detail, name='page_detail'),
+    path('', home, name='home'),  # Add this line for the home view
+    path('<slug:slug>/', page_detail, name='page_detail'),
 ]
