@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ValidationError
 from django.utils.text import slugify
 from django.utils import timezone
 
@@ -53,9 +54,15 @@ class PricingPackage(models.Model):
         return f"{self.get_segment_display()} - {self.year}"
 
     def clean(self):
-        print("Running clean() method for PricingPackage")
-        # Add any custom validation logic here
         super().clean()
+        print("DEBUG CLEAN:")
+        print(f"segment: {self.segment}")
+        print(f"year: {self.year}")
+        print(f"package_name: {self.package_name}")
+        print(f"file: {self.file}")
+        if not self.segment or not self.year or not self.package_name or not self.file:
+            raise ValidationError("All required fields must be filled.")
+
 
 class PricingPackageVersion(models.Model):
     pricing_package = models.ForeignKey(PricingPackage, related_name='versions', on_delete=models.CASCADE)
