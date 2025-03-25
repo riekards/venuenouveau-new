@@ -1,8 +1,49 @@
-{% extends "cms/base.html" %}
+<!-- root/templates/cms/page_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }}</title>
+</head>
+<body>
+    <header>
+        <h1>{{ page.title }}</h1>
+    </header>
+    
+    <main>
+        <!-- Render page content -->
+        <div>
+            {{ page.content|safe }}
+        </div>
 
-{% block content %}
-	<h1>{{ page.title }}</h1>
-	<div>
-		{{ page.content|safe }}
-	</div>
-{% endblock %}
+        <!-- Only show pricing packages if available (i.e. on the trendy-offers page) -->
+        {% if pricing_packages %}
+            <section id="pricing-packages">
+                <h2>Pricing Packages</h2>
+                <ul>
+                    {% for package in pricing_packages %}
+                        <li>
+                            <h3>{{ package.get_segment_display }} - {{ package.package_name }}</h3>
+                            <p>Year: {{ package.year }}</p>
+                            {% comment %} Loop through versions to find the latest approved version {% endcomment %}
+                            {% for version in package.versions.all %}
+                                {% if version.version == package.current_version and version.approved %}
+                                    <p>
+                                        <a href="{{ version.file.url }}" download>
+                                            Download Package (Version {{ version.version }})
+                                        </a>
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; Your Company Name</p>
+    </footer>
+</body>
+</html>

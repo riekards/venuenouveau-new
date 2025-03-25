@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import home, page_detail
+from . import views
 
-app_name = 'cms'
+app_name = 'cms'  # Ensure this is unique and not duplicated in other apps
 
 urlpatterns = [
-    path('', home, name='home'),  # Add this line for the home view
-    path('<slug:slug>/', page_detail, name='page_detail'),
+    path('', views.home, name='home'),
+    path('page/<slug:slug>/', views.page_detail, name='page_detail'),
+    # ...other URL patterns...
 ]

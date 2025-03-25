@@ -1,0 +1,28 @@
+{% load i18n admin_urls static %}
+<table class="inline-related">
+    <thead>
+        <tr>
+            {% for field in inline_admin_formset.opts.get_fields %}
+                <th>{{ field.verbose_name|capfirst }}</th>
+            {% endfor %}
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for inline_admin_form in inline_admin_formset %}
+        <tr class="form-row">
+            {% for field in inline_admin_form.fields.values %}
+                <td>{{ field.field.value|default_if_none:"" }}</td>
+            {% endfor %}
+            <td>
+                {% if not inline_admin_form.form.instance.approved %}
+                    <a class="button" href="{% url 'admin:cms_pricingpackage_approve_version' package_id=inline_admin_form.form.instance.pricing_package.id version_id=inline_admin_form.form.instance.id %}">Approve</a>
+                {% else %}
+                    Approved by {{ inline_admin_form.form.instance.approved_by }}<br>
+                    at {{ inline_admin_form.form.instance.approved_at }}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
