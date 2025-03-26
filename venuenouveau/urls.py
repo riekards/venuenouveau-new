@@ -23,7 +23,5 @@ from cms import admin as cms_admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('cms/', include(('cms.urls', 'cms'), namespace='cms')),  # Ensure this is unique
-    # If there are other conflicting namespaces, rename them:
-    # path('cms-admin/', include(('cms_admin.urls', 'cms_admin'), namespace='cms_admin')),
+    path('cms/', include(('cms.urls', 'cms'), namespace='cms')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
